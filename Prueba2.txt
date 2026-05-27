@@ -1,0 +1,10 @@
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE Crear_par IS
+  nums SYS.ODCINUMBERLIST := SYS.ODCINUMBERLIST(2, 4, 6, 8);
+BEGIN
+
+  FOR i IN 1 .. nums.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Par ' || i || ': ' || nums(i));
+  END LOOP;
+END Crear_par;

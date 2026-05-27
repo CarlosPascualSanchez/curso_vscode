@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Piedra Papel Tijera</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; padding: 20px; }
+    button { margin: 5px; padding: 10px 20px; }
+    #result { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Piedra, Papel y Tijera</h1>
+  <div>
+    <button data-choice="piedra">Piedra</button>
+    <button data-choice="papel">Papel</button>
+    <button data-choice="tijera">Tijera</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    const choices = ['piedra','papel','tijera'];
+    function randomChoice(){ return choices[Math.floor(Math.random()*choices.length)]; }
+    function determineWinner(p,c){
+      if(p===c) return `Empate: ${p} vs ${c}`;
+      const wins = { piedra:'tijera', tijera:'papel', papel:'piedra' };
+      if(wins[p]===c) return `Gana jugador: ${p} vence a ${c}`;
+      return `Gana computadora: ${c} vence a ${p}`;
+    }
+
+    document.querySelectorAll('button[data-choice]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const player = btn.getAttribute('data-choice');
+        const computer = randomChoice();
+        const message = determineWinner(player, computer);
+        document.getElementById('result').textContent = `Jugador=${player} | Computadora=${computer} -> ${message}`;
+      });
+    });
+  </script>
+</body>
+</html>
